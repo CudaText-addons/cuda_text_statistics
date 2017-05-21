@@ -20,6 +20,10 @@ Sentences with n words:
 """
 
 
+def count_chars():
+    res = [len(ed.get_text_line(i)) for i in range(ed.get_line_count())]
+    return sum(res)
+
 def count_words(s):
     return len(re.findall(r'\w+', s))
 
@@ -36,8 +40,10 @@ def get_common_words(s):
 
 
 def get_sentences(s):
-    list1 = re.findall(r'^\w[^\n\.\?\!]+[\.\?\!]', s)
-    list2 = re.findall(r'(?<=[\.\?\!])\x20+[A-Z0-9][^\n\.\?\!]+[\.\?\!]', s)
+    REGEX_SENT_1 = r'^\w[^\n\.\?\!]+?[\.\?\!]'
+    REGEX_SENT_2 = r'(?<=[\.\?\!])\x20+[A-Z0-9][^\n\.\?\!]+?[\.\?\!]'
+    list1 = re.findall(REGEX_SENT_1, s, flags=re.M)
+    list2 = re.findall(REGEX_SENT_2, s, flags=re.M)
     res = list1+list2
     res = [s.strip(' ') for s in res]
     return res
@@ -54,19 +60,15 @@ def get_sentences_stat(s):
 class Command:
     def run(self):
         s = ed.get_text_all()
-
-        n_words = count_words(s)
-        n_letters = count_letters(s)
-        n_lines = ed.get_line_count()
-        n_chars = sum([len(ed.get_text_line(i)) for i in range(ed.get_line_count())])
-
         common_info = get_common_words(s)
         sent_info = get_sentences_stat(s)
-        #print('sent', get_sentences(s))
 
         text = REPORT % (
             os.path.basename(ed.get_filename()),
-            n_lines, n_words, n_letters, n_chars,
+            ed.get_line_count(),
+            count_words(s),
+            count_letters(s),
+            count_chars(),
             COMMON_COUNT,
             common_info,
             sent_info
@@ -81,6 +83,6 @@ class Command:
     def show_sent(self):
         s = ed.get_text_all()
         sent = get_sentences(s)
-        text = '\n'.join(sorted(sent))
+        text = '\n'.join(sorted(sent))+'\n'
         file_open('')
         ed.set_text_all(text)
