@@ -3,5 +3,5 @@
 + shows most common words (30)
 + allows to output report to new tab
 
-2016.02.29
+2015.12.14
 init
