@@ -1,6 +1,8 @@
 
-2017.05.21
+2017.05.21.2
 + shows most common words (30)
++ shows count of sentences of n words
++ shows list of all sentences (new command)
 + allows to output report to new tab
 
 2015.12.14
