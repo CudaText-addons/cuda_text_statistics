@@ -40,7 +40,7 @@ def get_common_words(s):
 
 
 def get_sentences(s):
-    REGEX_SENT_1 = r'^\w[^\n\.\?\!]+?[\.\?\!]'
+    REGEX_SENT_1 = r'^[A-Z0-9][^\n\.\?\!]+?[\.\?\!]'
     REGEX_SENT_2 = r'(?<=[\.\?\!])\x20+[A-Z0-9][^\n\.\?\!]+?[\.\?\!]'
     list1 = re.findall(REGEX_SENT_1, s, flags=re.M)
     list2 = re.findall(REGEX_SENT_2, s, flags=re.M)
