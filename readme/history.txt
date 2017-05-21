@@ -1,0 +1,7 @@
+
+2017.05.21
++ shows most common words (30)
++ allows to output report to new tab
+
+2016.02.29
+init
