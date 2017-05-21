@@ -3,6 +3,7 @@ title=Text Statistics
 desc=Shows for current text: count of lines, words, letters, all chars
 type=cudatext-plugin
 subdir=cuda_text_stat
+homepage=https://github.com/CudaText-addons/cuda_text_statistics
 
 [item1]
 section=commands
