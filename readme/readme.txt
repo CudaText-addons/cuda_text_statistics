@@ -8,7 +8,7 @@ gets info:
 - most common words (up to 30, can change this number in source code)
 - count of sentences which have n (1 to 9) words
 - additional command: find all sentences, and output them to a new tab
- 
 
-author: Alexey T.
+
+author: Alexey Torgashin (CudaText)
 license: MIT

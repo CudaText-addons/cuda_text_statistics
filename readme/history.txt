@@ -1,9 +1,14 @@
 
+2021.02.06
++ add: plugin now handles also sentences with newline-breaks, e.g. text of license in C++ source code inside // comments
+* change: plugin don't allow sentences with *-char, because it is list separator in license files
++ add: command "Report to new document"
+
 2017.05.22
-+ shows most common words (30)
-+ shows count of sentences of 1..9 words
-+ shows list of all sentences (new command)
-+ can output report to new tab
++ add: shows most common words (30)
++ add: shows count of sentences of 1..9 words
++ add: shows list of all sentences (new command)
++ add: can output report to new tab
 
 2015.12.14
-init
+initial version
