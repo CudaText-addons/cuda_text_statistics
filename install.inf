@@ -7,10 +7,15 @@ homepage=https://github.com/CudaText-addons/cuda_text_statistics
 
 [item1]
 section=commands
-caption=Text Statistics\Show statistics
+caption=Text Statistics\Report in message box
 method=run
 
 [item2]
+section=commands
+caption=Text Statistics\Report in new document
+method=run_doc
+
+[item10]
 section=commands
 caption=Text Statistics\Show all sentences
 method=show_sent

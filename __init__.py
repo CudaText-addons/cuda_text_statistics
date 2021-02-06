@@ -40,11 +40,8 @@ def get_common_words(s):
 
 
 def get_sentences(s):
-    REGEX_SENT_1 = r'^[A-Z0-9][^\n\.\?\!]+?[\.\?\!]'
-    REGEX_SENT_2 = r'(?<=[\.\?\!])\x20+[A-Z0-9][^\n\.\?\!]+?[\.\?\!]'
-    list1 = re.findall(REGEX_SENT_1, s, flags=re.M)
-    list2 = re.findall(REGEX_SENT_2, s, flags=re.M)
-    res = list1+list2
+    REGEX_SENT = r'\b[A-Z0-9][^\.\?\!\*]+?[\.\?\!]'
+    res = re.findall(REGEX_SENT, s, flags=re.M)
     res = [s.strip(' ') for s in res]
     return res
 
@@ -79,6 +76,24 @@ class Command:
             file_open('')
             ed.set_text_all(text)
 
+    def run_doc(self):
+        s = ed.get_text_all()
+        common_info = get_common_words(s)
+        sent_info = get_sentences_stat(s)
+
+        text = REPORT % (
+            os.path.basename(ed.get_filename()),
+            ed.get_line_count(),
+            count_words(s),
+            count_letters(s),
+            count_chars(),
+            COMMON_COUNT,
+            common_info,
+            sent_info
+            )
+
+        file_open('')
+        ed.set_text_all(text)
 
     def show_sent(self):
         s = ed.get_text_all()
