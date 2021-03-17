@@ -3,21 +3,24 @@ import re
 from cudatext import *
 from collections import Counter
 
+from cudax_lib import get_translation
+_ = get_translation(__file__)  # I18N
+
 COMMON_COUNT = 30
 SENTENCE_WORDS = 10
-REPORT = """Text Statistics for "%s"
+REPORT = _("""Text Statistics for "{}"
 
-Lines: %d
-Words: %d
-Letters: %d
-All chars: %d
+Lines: {}
+Words: {}
+Letters: {}
+All chars: {}
 
-Most common words (%d):
-%s
+Most common words ({}):
+{}
 
 Sentences with n words:
-%s
-"""
+{}
+""")
 
 
 def count_chars():
@@ -50,7 +53,7 @@ def get_sentences_stat(s):
     items = get_sentences(s)
     for count in range(1, SENTENCE_WORDS):
         found = [item for item in items if count==len(re.findall(r'\w+', item))]
-        res.append('%d words: %d' % (count, len(found)))
+        res.append(_('{} words: {}').format(count, len(found)))
     return '\n'.join(res)
 
 
@@ -60,7 +63,7 @@ class Command:
         common_info = get_common_words(s)
         sent_info = get_sentences_stat(s)
 
-        text = REPORT % (
+        text = REPORT.format(
             os.path.basename(ed.get_filename()),
             ed.get_line_count(),
             count_words(s),
@@ -71,7 +74,7 @@ class Command:
             sent_info
             )
 
-        res = msg_box(text+'\nShow report in a new tab?', MB_OKCANCEL+MB_ICONINFO)
+        res = msg_box(text+_('\nShow report in a new tab?'), MB_OKCANCEL+MB_ICONINFO)
         if res==ID_OK:
             file_open('')
             ed.set_text_all(text)
@@ -81,7 +84,7 @@ class Command:
         common_info = get_common_words(s)
         sent_info = get_sentences_stat(s)
 
-        text = REPORT % (
+        text = REPORT.format(
             os.path.basename(ed.get_filename()),
             ed.get_line_count(),
             count_words(s),

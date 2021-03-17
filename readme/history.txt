@@ -1,4 +1,7 @@
 
+2021.03.17
++ add: i18n (from Markus)
+
 2021.02.06
 + add: plugin now handles also sentences with newline-breaks, e.g. text of license in C++ source code inside // comments
 * change: plugin don't allow sentences with *-char, because it is list separator in license files
