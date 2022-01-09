@@ -27,6 +27,10 @@ def count_chars():
     res = [len(ed.get_text_line(i)) for i in range(ed.get_line_count())]
     return sum(res)
 
+def count_chars_sel():
+    res = [len(ed.get_text_line(i)) for i in range(ed.get_sel_lines()[0], ed.get_sel_lines()[1] + 1)]
+    return sum(res)
+
 def count_words(s):
     return len(re.findall(r'\w+', s))
 
@@ -78,6 +82,27 @@ class Command:
         if res==ID_OK:
             file_open('')
             ed.set_text_all(text)
+    
+    def run_sel(self):
+        s = ed.get_text_sel()
+        common_info = get_common_words(s)
+        sent_info = get_sentences_stat(s)
+
+        text = REPORT.format(
+            os.path.basename(ed.get_filename()),
+            ed.get_sel_lines()[1] - ed.get_sel_lines()[0] + 1,
+            count_words(s),
+            count_letters(s),
+            count_chars_sel(),
+            COMMON_COUNT,
+            common_info,
+            sent_info
+            )
+
+        res = msg_box(text+_('\nShow report in a new tab?'), MB_OKCANCEL+MB_ICONINFO)
+        if res==ID_OK:
+            file_open('')
+            ed.set_text_all(text)
 
     def run_doc(self):
         s = ed.get_text_all()
@@ -90,6 +115,25 @@ class Command:
             count_words(s),
             count_letters(s),
             count_chars(),
+            COMMON_COUNT,
+            common_info,
+            sent_info
+            )
+
+        file_open('')
+        ed.set_text_all(text)
+    
+    def run_doc_sel(self):
+        s = ed.get_text_sel()
+        common_info = get_common_words(s)
+        sent_info = get_sentences_stat(s)
+
+        text = REPORT.format(
+            os.path.basename(ed.get_filename()),
+            ed.get_sel_lines()[1] - ed.get_sel_lines()[0] + 1,
+            count_words(s),
+            count_letters(s),
+            count_chars_sel(),
             COMMON_COUNT,
             common_info,
             sent_info

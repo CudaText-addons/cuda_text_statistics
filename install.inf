@@ -15,6 +15,16 @@ section=commands
 caption=Text Statistics\Report in new document
 method=run_doc
 
+[item3]
+section=commands
+caption=Text Statistics\Report in message box (selected text)
+method=run_sel
+
+[item4]
+section=commands
+caption=Text Statistics\Report in new document (selected text)
+method=run_doc_sel
+
 [item10]
 section=commands
 caption=Text Statistics\Show all sentences
