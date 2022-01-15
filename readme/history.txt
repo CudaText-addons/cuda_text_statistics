@@ -1,4 +1,4 @@
-2022.01.09
+2022.01.09 (by Alexey T. & @ildarkhasanshin)
 + add: commands for selected text
 + add: message box shows button "To a new tab"
 

@@ -10,5 +10,7 @@ gets info:
 - additional command: find all sentences, and output them to a new tab
 
 
-author: Alexey Torgashin (CudaText), ildarkhasanshin
+authors:
+  Alexey Torgashin (CudaText)
+  ildarkhasanshin on GitHub
 license: MIT
