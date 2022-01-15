@@ -96,6 +96,8 @@ class Command:
 
     def run_sel(self):
         s = ed.get_text_sel()
+        if not s:
+            return msg_status(_('No selection'))
         common_info = get_common_words(s)
         sent_info = get_sentences_stat(s)
 
@@ -136,6 +138,8 @@ class Command:
 
     def run_doc_sel(self):
         s = ed.get_text_sel()
+        if not s:
+            return msg_status(_('No selection'))
         common_info = get_common_words(s)
         sent_info = get_sentences_stat(s)
 

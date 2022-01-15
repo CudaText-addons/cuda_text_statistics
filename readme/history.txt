@@ -1,5 +1,6 @@
 2022.01.09
 + add: commands for selected text
++ add: message box shows button "To a new tab"
 
 2021.03.17
 + add: i18n (from Markus)

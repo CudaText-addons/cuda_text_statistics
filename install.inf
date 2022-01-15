@@ -7,25 +7,25 @@ homepage=https://github.com/CudaText-addons/cuda_text_statistics
 
 [item1]
 section=commands
-caption=Text Statistics\Report in message box
+caption=Text Statistics\Info about entire document, in message box
 method=run
 
 [item2]
 section=commands
-caption=Text Statistics\Report in new document
+caption=Text Statistics\Info about entire document, in new tab
 method=run_doc
 
-[item3]
+[item5]
 section=commands
-caption=Text Statistics\Report in message box (selected text)
+caption=Text Statistics\Info about selection, in message box
 method=run_sel
 
-[item4]
+[item6]
 section=commands
-caption=Text Statistics\Report in new document (selected text)
+caption=Text Statistics\Info about selection, in new tab
 method=run_doc_sel
 
-[item10]
+[item20]
 section=commands
 caption=Text Statistics\Show all sentences
 method=show_sent
