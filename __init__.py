@@ -27,9 +27,12 @@ def count_chars():
     res = [len(ed.get_text_line(i)) for i in range(ed.get_line_count())]
     return sum(res)
 
+def get_sel_lines_():
+    sel_lines_ = ed.get_sel_lines()
+    return sel_lines_[1] - sel_lines_[0] + 1
+
 def count_chars_sel():
-    res = [len(ed.get_text_line(i)) for i in range(ed.get_sel_lines()[0], ed.get_sel_lines()[1] + 1)]
-    return sum(res)
+    return len(ed.get_text_sel())
 
 def count_words(s):
     return len(re.findall(r'\w+', s))
@@ -90,7 +93,7 @@ class Command:
 
         text = REPORT.format(
             os.path.basename(ed.get_filename()),
-            ed.get_sel_lines()[1] - ed.get_sel_lines()[0] + 1,
+            get_sel_lines_(),
             count_words(s),
             count_letters(s),
             count_chars_sel(),
@@ -130,7 +133,7 @@ class Command:
 
         text = REPORT.format(
             os.path.basename(ed.get_filename()),
-            ed.get_sel_lines()[1] - ed.get_sel_lines()[0] + 1,
+            get_sel_lines_(),
             count_words(s),
             count_letters(s),
             count_chars_sel(),
