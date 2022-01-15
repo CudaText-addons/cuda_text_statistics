@@ -8,7 +8,7 @@ _ = get_translation(__file__)  # I18N
 
 COMMON_COUNT = 30
 SENTENCE_WORDS = 10
-REPORT = _("""Text Statistics for {}
+REPORT = _("""Statistics for {}
 
 Lines: {}
 Words: {}
@@ -95,9 +95,11 @@ class Command:
             ed.set_text_all(text)
 
     def run_sel(self):
+        if len(ed.get_carets())!=1:
+            return msg_status(_('Need single selection'))
         s = ed.get_text_sel()
         if not s:
-            return msg_status(_('No selection'))
+            return msg_status(_('Need single selection'))
         common_info = get_common_words(s)
         sent_info = get_sentences_stat(s)
 
@@ -137,9 +139,11 @@ class Command:
         ed.set_text_all(text)
 
     def run_doc_sel(self):
+        if len(ed.get_carets())!=1:
+            return msg_status(_('Need single selection'))
         s = ed.get_text_sel()
         if not s:
-            return msg_status(_('No selection'))
+            return msg_status(_('Need single selection'))
         common_info = get_common_words(s)
         sent_info = get_sentences_stat(s)
 
