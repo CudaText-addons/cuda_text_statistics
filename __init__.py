@@ -8,7 +8,7 @@ _ = get_translation(__file__)  # I18N
 
 COMMON_COUNT = 30
 SENTENCE_WORDS = 10
-REPORT = _("""Text Statistics for "{}"
+REPORT = _("""Text Statistics for {}
 
 Lines: {}
 Words: {}
@@ -30,9 +30,6 @@ def count_chars():
 def get_sel_lines_():
     sel_lines_ = ed.get_sel_lines()
     return sel_lines_[1] - sel_lines_[0] + 1
-
-def count_chars_sel():
-    return len(ed.get_text_sel())
 
 def count_words(s):
     return len(re.findall(r'\w+', s))
@@ -63,15 +60,26 @@ def get_sentences_stat(s):
         res.append(_('{} words: {}').format(count, len(found)))
     return '\n'.join(res)
 
+def get_title(ed, is_sel):
+    s = ed.get_filename()
+    if s:
+        s = '"'+os.path.basename(s)+'"'
+    else:
+        s = '"'+ed.get_prop(PROP_TAB_TITLE, '')+'"'
+    if is_sel:
+        s = _('selection in')+' '+s
+    return s
+
 
 class Command:
+
     def run(self):
         s = ed.get_text_all()
         common_info = get_common_words(s)
         sent_info = get_sentences_stat(s)
 
         text = REPORT.format(
-            os.path.basename(ed.get_filename()),
+            get_title(ed, False),
             ed.get_line_count(),
             count_words(s),
             count_letters(s),
@@ -81,29 +89,29 @@ class Command:
             sent_info
             )
 
-        res = msg_box(text+_('\nShow report in a new tab?'), MB_OKCANCEL+MB_ICONINFO)
-        if res==ID_OK:
+        res = msg_box_ex('CudaText', text, [_('OK'), _('To a new tab')], MB_ICONINFO, 0)
+        if res==1:
             file_open('')
             ed.set_text_all(text)
-    
+
     def run_sel(self):
         s = ed.get_text_sel()
         common_info = get_common_words(s)
         sent_info = get_sentences_stat(s)
 
         text = REPORT.format(
-            os.path.basename(ed.get_filename()),
+            get_title(ed, True),
             get_sel_lines_(),
             count_words(s),
             count_letters(s),
-            count_chars_sel(),
+            len(s),
             COMMON_COUNT,
             common_info,
             sent_info
             )
 
-        res = msg_box(text+_('\nShow report in a new tab?'), MB_OKCANCEL+MB_ICONINFO)
-        if res==ID_OK:
+        res = msg_box_ex('CudaText', text, [_('OK'), _('To a new tab')], MB_ICONINFO, 0)
+        if res==1:
             file_open('')
             ed.set_text_all(text)
 
@@ -113,7 +121,7 @@ class Command:
         sent_info = get_sentences_stat(s)
 
         text = REPORT.format(
-            os.path.basename(ed.get_filename()),
+            get_title(ed, False),
             ed.get_line_count(),
             count_words(s),
             count_letters(s),
@@ -125,18 +133,18 @@ class Command:
 
         file_open('')
         ed.set_text_all(text)
-    
+
     def run_doc_sel(self):
         s = ed.get_text_sel()
         common_info = get_common_words(s)
         sent_info = get_sentences_stat(s)
 
         text = REPORT.format(
-            os.path.basename(ed.get_filename()),
+            get_title(ed, True),
             get_sel_lines_(),
             count_words(s),
             count_letters(s),
-            count_chars_sel(),
+            len(s),
             COMMON_COUNT,
             common_info,
             sent_info
