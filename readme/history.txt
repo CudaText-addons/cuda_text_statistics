@@ -1,3 +1,6 @@
+2026.11.21
+- fix: avoid deprecated API: get_filename
+
 2022.01.09 (by Alexey T. & @ildarkhasanshin)
 + add: commands for selected text
 + add: message box shows button "To a new tab"

@@ -61,7 +61,7 @@ def get_sentences_stat(s):
     return '\n'.join(res)
 
 def get_title(ed, is_sel):
-    s = ed.get_filename()
+    s = ed.get_prop(PROP_FN, '')
     if s:
         s = '"'+os.path.basename(s)+'"'
     else:
